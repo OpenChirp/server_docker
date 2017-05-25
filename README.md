@@ -1,7 +1,7 @@
-# openchirp-docker
-Multi-container docker instances for Openchirp Services. 
+# Openchirp Server Socker
+Multi-container docker instances for Openchirp Server Services. 
 
-Start using `docker-compose` (from inside the `openchirp-docker` repo folder):
+Use `docker-compose` (from inside the `openchirp-docker` repo folder):
 `docker-compose up`
 
 ## Openchirp Services
