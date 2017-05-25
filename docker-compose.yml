@@ -1,0 +1,95 @@
+version: '2'
+
+services:
+  mongodb:
+    image: mongo # https://hub.docker.com/_/mongo/
+    #volumes:
+    #  - ./data/mongodb:/data/db
+    ports:
+      - "27017:27017"
+    command: "--smallfiles --logpath=/dev/null"
+
+  redis: 
+    image: redis # https://hub.docker.com/_/redis/
+    #volumes:
+    #  - ./data/redis/:/data
+    ports:
+      - "6379:6379"
+
+  influxdb: 
+    build: influxdb
+    ports:
+      - "8083:8083"
+      - "8086:8086"
+      - "25826:25826/udp"
+    #  - "8090:8090"
+    volumes:
+        - ./data/influxdb:/var/lib/influxdb
+    environment:
+      - INFLUXDB_ADMIN_ENABLED=true
+    # INFLUXDB_GRAPHITE_ENABLED=true  
+   
+  mosquitto: 
+    build: mosquitto # https://hub.docker.com/_/eclipse-mosquitto/
+    #volumes:
+    #  - ./data/mosquitto/config:/mosquitto/config
+    #  - ./data/mosquitto/data:/mosquitto/data
+    #  - ./data/mosquitto/log:/mosquitto/log
+    links:
+      - mongodb
+      - influxdb
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+
+  grafana:
+    image: grafana/grafana
+    links:
+      - influxdb
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+
+  collectd:
+    build: collectd
+    privileged: true
+    network_mode: host
+    volumes:
+      - /proc:/mnt/proc:ro
+
+  web: 
+    build: httpd
+    ports:
+      - "80:80"
+
+  rest: 
+    build: node
+    links:
+      - mongodb
+      - redis
+      - influxdb
+      - web
+    ports:
+      - "10010:10010" 
+    environment:
+      - NODE_ENV=development
+    command: npm start
+    #restart: always
+  
+  mqtt-tsdb-storage-service:
+    build: mqtt-tsdb-storage-service
+    links:
+      - rest:openchirp.andrew.cmu.edu
+      - mosquitto:openchirp.andrew.cmu.edu
+      - influxdb:openchirp.andrew.cmu.edu
+    command: python service.py -f service.config
+    #restart: always
+  
+  #serialization-service:
+  #  build: serialization-service
+  #  links:
+  #    - rest
+  #    - mosquitto
+  #    - influxdb
+  #  command: main
