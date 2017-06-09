@@ -46,10 +46,6 @@ services:
       - "8883:8883"
       - "9001:9001"
 
-  grafana:
-    ports:
-      - "3000:3000"
-
   web: 
     build: httpd  
     volumes:

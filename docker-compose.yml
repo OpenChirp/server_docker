@@ -24,6 +24,8 @@ services:
 
   grafana:
     image: grafana/grafana # https://hub.docker.com/r/grafana/grafana/
+    ports:
+      - "3000:3000"    
     links:
       - influxdb
 
