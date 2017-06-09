@@ -51,18 +51,23 @@ services:
       - "3000:3000"
 
   web: 
+    build: httpd  
     volumes:
       - ./httpd/code:/openchirp
 
   rest: 
+    build: node  
     volumes:
+      - ./node/config:/usr/src/app/config
       - ./node/code:/usr/src/app
     ports:
       - "10010:10010"
     environment:
       - NODE_ENV=development # will cause the node.js app to load the config/development.json configuration file
+    #command: sleep 10000
 
   mqtt-tsdb-storage-service:
+    build: mqtt-tsdb-storage-service    
     volumes:
       - ./mqtt-tsdb-storage-service/code:/code
       - ./mosquitto/certs:/etc/ssl/certs/mosquitto:ro

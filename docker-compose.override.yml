@@ -86,6 +86,8 @@ services:
 
   rest: 
     image: openchirp/rest  
+    volumes:
+      - ./node/config:/usr/src/app/config    
     environment:
       - NODE_ENV=production # will cause the node.js app to load the config/production.json configuration file
     logging:

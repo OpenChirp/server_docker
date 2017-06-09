@@ -28,24 +28,22 @@ services:
       - influxdb
 
   web: 
-    build: httpd
     ports:
       - "80:80"
 
   rest: 
-    build: node
+    volumes:
+      - ./node/config:/usr/src/app/config  
     ports:
-      - "7000:7000"     
+      - "7000:10010"
     links:
       - mongodb
       - redis
       - influxdb
       - web
-    command: bash -c "cp -f /run/config/* /usr/src/app/config/ && 
-                      npm start"                                  
+    command: npm start
 
   mqtt-tsdb-storage-service:
-    build: mqtt-tsdb-storage-service
     links:
       - rest
       - mosquitto:mosquitto-server

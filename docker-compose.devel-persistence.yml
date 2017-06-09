@@ -49,7 +49,6 @@ services:
       - ./data/mosquitto/data:/mosquitto/data # permanent storage on the host
       - ./data/mosquitto/log:/mosquitto/log # permanent storage on the host
       - ./mosquitto/certs:/etc/ssl/certs
-
     hostname:
       mosquitto-server
     ports:
@@ -64,10 +63,12 @@ services:
       - "3000:3000"
 
   web: 
+    build: httpd    
     volumes:
       - ./httpd/code:/openchirp
 
   rest: 
+    build: node    
     volumes:
       - ./node/code:/usr/src/app
     ports:
@@ -76,6 +77,7 @@ services:
       - NODE_ENV=development # will cause the node.js app to load the config/development.json configuration file
 
   mqtt-tsdb-storage-service:
+    build: mqtt-tsdb-storage-service       
     volumes:
       - ./mqtt-tsdb-storage-service/code:/code
       - ./mosquitto/certs:/etc/ssl/certs/mosquitto:ro
