@@ -72,11 +72,14 @@ The demonstration configuration uses pre-built Openchirp images from [Docker Hub
 
 ### Development Configuration
 
-You can start a **development configuration** using the **docker-compose.devel.yml** file by running:
+The development configuration exposes all service ports, does not persist files and mounts application code from the host.
+
+Before starting a development configuration you should get the source code using the **fetch-repos.sh** script:
+> chmod +x fetch-repos.sh && ./fetch-repos.sh
+
+You start a **development configuration** using the **docker-compose.devel.yml** file:
 
 > `docker-compose -f docker-compose.yml -f docker-compose.devel.yml up -d`
-
-The development configuration exposes all service ports, does not do persistance and mounts application code from the host.
 
 You also have a **development configuration** with persistence configured in the **docker-compose.devel-persistence.yml**. Run it with:
 
