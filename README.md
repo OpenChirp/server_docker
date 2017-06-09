@@ -85,6 +85,13 @@ You also have a **development configuration** with persistence configured in the
 
 > `docker-compose -f docker-compose.yml -f docker-compose.devel-persistence.yml up -d`
 
+## Openchirp Docker Images
+
+Docker images with the Openchirp services application code and configuration were created, and are used by the **demonstration configuration**. The workflow intended is to use the development configuration(s) to perform changes, and then create new releases of the images which are then uploaded to Docker Hub. This allows to package the whole service (code included) in a docker image that can be easily redistributed.
+
+Once you have a working application, you can create a set of images using the **commit-and-push-images.sh  script**, which takes an image tag as argument. E.g. to commit images with a “v1” tag, do:
+
+> `./commit-and-push-images.sh v1`
 
 ## Monitoring
 

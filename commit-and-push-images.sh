@@ -8,7 +8,7 @@ docker_repos="serverdocker_web_1:openchirp/web serverdocker_rest_1:openchirp/res
 
 # edit these ate you convinience
 commit_author="Openchirp"
-commit_tag=version_1
+commit_tag="$1"
 commit_comment="\"${commit_tag} commit.\""
 
 # prefix commit tag with a ":"
