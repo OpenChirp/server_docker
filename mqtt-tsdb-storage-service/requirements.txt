@@ -1,0 +1,5 @@
+influxdb
+configparser
+paho-mqtt
+twisted
+requests

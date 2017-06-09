@@ -1,0 +1,109 @@
+# demo configuration
+# see: https://docs.docker.com/compose/extends/#example-use-case
+#
+# -uses pre-build openchirp images
+# -services store permament files on the host, under ./data/<service>
+# -only map *essential* external ports
+# -services are always restarted
+# -logs have a maximum of 100m, and a maximum of 5 log files are kept
+#
+# *Logs*
+#
+#    "json-file" logging will write logs to:
+#    /var/lib/docker/containers/<container id>/<container id>-json.log
+#    
+#    You can use docker inspect to check this: 
+#    docker inspect --format='{{.LogPath}}' $INSTANCE_ID
+#    
+# IMPORTANT: This is just a demonstration configuration. Use in production at your own peril.
+# 
+version: '2'
+
+services:
+  mongodb:
+    volumes: 
+      - ./data/mongodb:/data/db # permanent storage on the host
+    logging:
+      driver: "json-file" 
+      options:
+        max-size: "100m"
+        max-file: "5"
+    restart: always
+
+  redis: 
+    volumes:
+      - ./data/redis/:/data # permanent storage on the host
+    logging:
+      driver: "json-file" 
+      options:
+        max-size: "100m"
+        max-file: "5"
+    restart: always
+ 
+  influxdb: 
+    volumes:
+        - ./data/influxdb:/var/lib/influxdb
+    environment:
+      - INFLUXDB_ADMIN_ENABLED=false
+      - INFLUXDB_GRAPHITE_ENABLED=false  
+    logging:
+      driver: "json-file" 
+      options:
+        max-size: "100m"
+        max-file: "5"
+    restart: always
+   
+  mosquitto: 
+    volumes:
+      - ./data/mosquitto/config:/mosquitto/config # permanent storage on the host
+      - ./data/mosquitto/data:/mosquitto/data # permanent storage on the host
+      - ./data/mosquitto/log:/mosquitto/log # permanent storage on the host
+      - ./mosquitto/certs:/etc/ssl/certs      
+    logging:
+      driver: "json-file" 
+      options:
+        max-size: "100m"
+        max-file: "5"
+    restart: always
+
+  grafana:
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+    logging:
+      driver: "json-file" 
+      options:
+        max-size: "100m"
+        max-file: "5"
+    restart: always
+
+  web: 
+    build: openchirp/web 
+    logging:
+      driver: "json-file" 
+      options:
+        max-size: "100m"
+        max-file: "5"
+    restart: always
+
+  rest: 
+    build: openchirp/rest  
+    environment:
+      - NODE_ENV=production # will cause the node.js app to load the config/production.json configuration file
+    logging:
+      driver: "json-file" 
+      options:
+        max-size: "100m"
+        max-file: "5"
+    restart: always
+  
+  mqtt-tsdb-storage-service:
+    build: openchirp/mqtt-tsdb-storage-service    
+    volumes:
+       - ./data/mqtt-tsdb-storage-service/log:/var/log/mqtt-tsdb-storage-service
+       - ./mosquitto/certs:/etc/ssl/certs/mosquitto:ro    
+    logging:
+      driver: "json-file" 
+      options:
+        max-size: "100m"
+        max-file: "5"
+    restart: always

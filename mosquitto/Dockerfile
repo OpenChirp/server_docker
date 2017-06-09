@@ -10,9 +10,17 @@ LABEL Description="Eclipse Mosquitto MQTT Broker"
 RUN apk --no-cache add mosquitto=1.4.10-r2 && \
     mkdir -p /mosquitto/config /mosquitto/data /mosquitto/log && \
     cp /etc/mosquitto/mosquitto.conf /mosquitto/config && \
-    chown -R mosquitto:mosquitto /mosquitto
+    chown -R mosquitto:mosquitto /mosquitto && \
+    apk --no-cache add openssl
 
 COPY mosquitto.conf /mosquitto/config/
 COPY docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["/usr/sbin/mosquitto", "-c", "/mosquitto/config/mosquitto.conf"]
+RUN chmod +x docker-entrypoint.sh
+
+ENTRYPOINT ["/docker-entrypoint.sh"] 
+
+# IMPORTANT: startup-mosquitto.sh will generate a self-signed certificate for mosquitto
+# (a new certificate must be generated if the docker instance changes address)
+COPY startup-mosquitto.sh /
+RUN chmod +x /startup-mosquitto.sh
+CMD ["/startup-mosquitto.sh"]

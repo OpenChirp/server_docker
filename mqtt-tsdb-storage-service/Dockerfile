@@ -2,13 +2,16 @@
 FROM python
 
 # clone mqtt_tsdb_storage_service repo code into the docker container 
-RUN git clone https://github.com/OpenChirp/mqtt_tsdb_storage_service.git /code
+#RUN git clone https://github.com/OpenChirp/mqtt_tsdb_storage_service.git /code
 
 # change working directory
 WORKDIR /code
 
-# copy config file
-ADD service.config /code/
+# copy code into the docker container 
+COPY ./code/ /code/
 
 # install dependencies
 RUN pip install -r requirements.txt
+
+# copy config file
+COPY service.config /run/

@@ -5,7 +5,7 @@ FROM httpd:2.4
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 # install git
-RUN apt-get update && apt-get install git -y
+#RUN apt-get update && apt-get install git -y
 
 # update the repository sources list
 # and install dependencies
@@ -34,14 +34,9 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 #install angular cli
 RUN npm install -g @angular/cli
 
-# clone website repo code into the docker container 
-RUN rm -fr /tmp/openchirp-website
-RUN git clone https://github.com/OpenChirp/website.git /tmp/openchirp-website
-WORKDIR /tmp/openchirp-website/
+# build website into the docker container 
+COPY ./code/ /openchirp/
+WORKDIR /openchirp
 RUN npm install
 RUN ng build --prod
-RUN cp -R /tmp/openchirp-website/dist/* /usr/local/apache2/htdocs/
-RUN rm -rf /tmp/openchirp-website
-
-# application's default port
-#EXPOSE 80
+RUN cp -R /openchirp/dist/* /usr/local/apache2/htdocs/

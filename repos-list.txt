@@ -1,0 +1,12 @@
+# repos will be cloned into a code folder inside target-code-folder 
+# line format:
+#    base-url:repo-name:tag:target-code-folder
+# 
+# NOTE: tag target-clone-folder can be empty (but ":"" must be there);
+#       if target-clone-folder is empty, it will clone into folder repo-name/code
+#
+github.com/OpenChirp:website::httpd
+github.com/OpenChirp:openchirp_rest::node
+github.com/OpenChirp:mqtt_tsdb_storage_service::mqtt-tsdb-storage-service
+github.com/OpenChirp:easybits::serialization_service
+#empty line at the end
