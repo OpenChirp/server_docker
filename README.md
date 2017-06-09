@@ -88,5 +88,4 @@ You also have a **development configuration** with persistence configured in the
 
 ## Monitoring
 
-
-https://github.com/uschtwill/docker_monitoring_logging_alerting
+A [monitoring, logging and alerting suite](https://github.com/uschtwill/docker_monitoring_logging_alerting) can be integrated into this application.
