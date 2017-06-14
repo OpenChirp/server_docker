@@ -36,6 +36,7 @@ RUN npm install -g @angular/cli
 
 # build website into the docker container 
 COPY ./code/ /openchirp/
+ADD ./config.ts /openchirp/src/app/
 WORKDIR /openchirp
 RUN npm install
 RUN ng build --prod
