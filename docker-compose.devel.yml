@@ -59,7 +59,7 @@ services:
     ports:
       - "10010:10010"
     environment:
-      - NODE_ENV=development # will cause the node.js app to load the config/development.json configuration file
+      - NODE_ENV=docker # will cause the node.js app to load the config/docker.json configuration file
     #command: sleep 10000
 
   mqtt-tsdb-storage-service:
