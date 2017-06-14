@@ -12,7 +12,7 @@ commit_tag="$1"
 commit_comment="\"${commit_tag} commit.\""
 
 # prefix commit tag with a ":"
-ct=":${commit_tag}"
+[ ! -z "$commit_tag" ] && target_folder ct=":${commit_tag}"
 
 # commit and push repos
 for dr in $docker_repos
