@@ -58,7 +58,6 @@ services:
       - ./node/code:/usr/src/app
     environment:
       - NODE_ENV=docker # will cause the node.js app to load the config/docker.json configuration file
-    #command: sleep 10000
 
   mqtt-tsdb-storage-service:
     build: mqtt-tsdb-storage-service    
