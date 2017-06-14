@@ -27,6 +27,13 @@ Multi-container docker setup for Openchirp Services.
 
 * More: Check [Compose Documentation](https://docs.docker.com/compose/overview/)
 
+## Website Address
+
+The demo website is configured for the URL [openchirp.demo](https://openchirp.demo). You need to make this address resolve to the container host so that **your** browser can access this URL. One way to do this is to add `<ip-of-container-host> openchirp.demo` to your [hosts](https://en.wikipedia.org/wiki/Hosts_(file)) file.
+
+If you are deploying the application in a docker host with a name that can be resolved with DNS, configure your instance to use this name by editing the `httpd/config.ts` file (this is a copy of [this config.ts](https://github.com/OpenChirp/website/blob/master/src/app/config.ts)). This will require rebuilding the image using the development config: 
+  > `docker-compose rm web && docker-compose -f docker-compose.yml -f docker-compose.devel.yml up --build -d`.
+
 ## Containers
 
 The application is composed of the following containers.
