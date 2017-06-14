@@ -70,10 +70,8 @@ services:
     volumes:
       - ./node/config:/usr/src/app/config      
       - ./node/code:/usr/src/app
-    ports:
-      - "10010:10010"
     environment:
-      - NODE_ENV=development # will cause the node.js app to load the config/development.json configuration file
+      - NODE_ENV=docker # will cause the node.js app to load the config/docker.json configuration file
 
   mqtt-tsdb-storage-service:
     build: mqtt-tsdb-storage-service       

@@ -56,8 +56,6 @@ services:
     volumes:
       - ./node/config:/usr/src/app/config
       - ./node/code:/usr/src/app
-    ports:
-      - "10010:10010"
     environment:
       - NODE_ENV=docker # will cause the node.js app to load the config/docker.json configuration file
     #command: sleep 10000
