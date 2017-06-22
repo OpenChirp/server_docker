@@ -12,11 +12,13 @@ services:
 
   influxdb: 
     build: influxdb
-   
+    environment:
+      - PRE_CREATE_DB="openchirp"   
+      
   mosquitto: 
     build: mosquitto # https://hub.docker.com/_/eclipse-mosquitto/
     ports:
-      - "1883:1883"    
+      - "1883:1883"
     hostname: mosquitto
     links:
       - mongodb

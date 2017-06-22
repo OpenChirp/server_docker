@@ -100,6 +100,17 @@ Once you have a working application, you can create a set of images using the **
 
 > `./commit-and-push-images.sh v1`
 
+## Future...
+
+### Mosquitto Configuration
+Currently Mosquitto is configured with two listners: TLS on port 1883 and no security on port 1884. The later port is not mapped and should not be accessible outside the docker environment. It was needed so that the rest application could connect to the Mosquitto server with minor changes (change the config file as opposed to change the code to support self-signed certificates used by the this docker instance of Mosquitto).
+
+Mosquitto is also not configured with users or ACLs.
+
+### Authentication
+
+The rest service is configured with no auth.
+
 ## Monitoring
 
 A [monitoring, logging and alerting suite](https://github.com/uschtwill/docker_monitoring_logging_alerting) can be integrated into this application.

@@ -1,6 +1,7 @@
-#  development configuration (run using: docker-compose -f docker-compose.yml -f docker-compose.devel.yml up -d)
+#  test configuration (run using: docker-compose -f docker-compose.yml -f docker-compose.devel.yml up -d)
 #  see: https://docs.docker.com/compose/extends/#example-use-case
 #  
+# -
 # -services *dot not* store permament files
 # -map all service ports; rest API at port 10010
 # -mounts source code from the host
@@ -44,6 +45,7 @@ services:
       mosquitto-server
     ports:
       - "1883:1883"
+      - "1884:1884"      
       - "8883:8883"
       - "9001:9001"
 
@@ -58,7 +60,8 @@ services:
       - ./node/config:/usr/src/app/config
       - ./node/code:/usr/src/app
     environment:
-      - NODE_ENV=docker # will cause the node.js app to load the config/docker.json configuration file
+      - NODE_ENV=test # will cause the node.js app to load the config/test.json configuration file
+    command: sleep 1000000 #npm test
 
   mqtt-tsdb-storage-service:
     build: mqtt-tsdb-storage-service    

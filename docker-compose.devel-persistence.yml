@@ -40,7 +40,7 @@ services:
       - "25826:25826/udp"
     environment:
       - INFLUXDB_ADMIN_ENABLED=true
-      - PRE_CREATE_DB="openchirp"
+      - PRE_CREATE_DB="openchirp"         
     #  - INFLUXDB_GRAPHITE_ENABLED=true  
 
   mosquitto: 

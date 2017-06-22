@@ -45,7 +45,7 @@ services:
         - ./data/influxdb:/var/lib/influxdb
     environment:
       - INFLUXDB_ADMIN_ENABLED=false
-      - INFLUXDB_GRAPHITE_ENABLED=false  
+      - INFLUXDB_GRAPHITE_ENABLED=false        
     logging:
       driver: "json-file" 
       options:
