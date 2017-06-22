@@ -111,6 +111,6 @@ Mosquitto is also not configured with users or ACLs.
 
 The rest service is configured with no auth.
 
-## Monitoring
+### Monitoring
 
 A [monitoring, logging and alerting suite](https://github.com/uschtwill/docker_monitoring_logging_alerting) can be integrated into this application.
