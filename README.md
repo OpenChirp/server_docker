@@ -73,6 +73,8 @@ These are the configurations provided:
 
 * **docker-compose.devel-persistence.yml**: Development Configuration with persistence
 
+* **docker-compose.test.yml**: Test Configuration (to execute code tests)
+
 ### Demonstration Configuration
 
 The demonstration configuration uses pre-built Openchirp images from [Docker Hub](https://hub.docker.com/u/openchirp/), persists data on the host, exposes a minimal amount of ports, restarts services automatically and defines log limits. ** This is the default configuration **
