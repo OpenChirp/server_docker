@@ -39,6 +39,10 @@ services:
     image: openchirp/web 
     restart: always
   
+  rest: 
+    image: openchirp/rest
+    command: /bin/true # execute "dummy" application
+
   mqtt-tsdb-storage-service:
     image: openchirp/mqtt-tsdb-storage-service    
     volumes:
