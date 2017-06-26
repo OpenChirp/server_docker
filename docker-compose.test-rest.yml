@@ -42,7 +42,7 @@ services:
   rest: 
     image: openchirp/rest
     volumes:
-      - .:/usr/src/app    
+      - ./openchirp_rest:/usr/src/app    
     command: bash -c "while :; do sleep 100; done" # do not start now; this will keep the container up
 
   mqtt-tsdb-storage-service:
