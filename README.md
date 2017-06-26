@@ -73,7 +73,7 @@ These are the configurations provided:
 
 * **docker-compose.devel-persistence.yml**: Development Configuration with persistence
 
-* **docker-compose.test.yml**: Test Configuration (to execute code tests)
+* **docker-compose.test-rest.yml**: Starts services needed to tests the REST application
 
 ### Demonstration Configuration
 

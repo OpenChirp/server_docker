@@ -1,0 +1,46 @@
+# test configuration *for REST service* (run using: docker-compose -f docker-compose.yml -f docker-compose.test.yml up -d)
+# see: https://docs.docker.com/compose/extends/#example-use-case
+#
+# -starts services needed to test the REST applications
+# -uses pre-build openchirp images
+# -services *dot not* store permament files
+# -only map *essential* external ports
+# -services are always restarted
+#
+# *Logs*
+#
+#    "json-file" logging will write logs to:
+#    /var/lib/docker/containers/<container id>/<container id>-json.log
+#    
+#    You can use docker inspect to check this: 
+#    docker inspect --format='{{.LogPath}}' $INSTANCE_ID
+# 
+version: '2'
+
+services:
+  mongodb:
+    restart: always
+
+  redis: 
+    restart: always
+ 
+  influxdb: 
+    restart: always
+   
+  mosquitto: 
+    volumes:
+      - ./mosquitto/certs:/etc/ssl/certs      
+    restart: always
+
+  grafana:
+    restart: always
+
+  web: 
+    image: openchirp/web 
+    restart: always
+  
+  mqtt-tsdb-storage-service:
+    image: openchirp/mqtt-tsdb-storage-service    
+    volumes:
+       - ./mosquitto/certs:/etc/ssl/certs/mosquitto:ro    
+    restart: always
