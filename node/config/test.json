@@ -1,13 +1,13 @@
 {
-"db": "localhost://mongodb/openchirp_test",
+"db": "mongodb://mongodb/openchirp_test",
 "mqtt": {
-   	"broker": "mqtt://localhost",
+   	"broker": "mqtt://mosquitto",
    	"port":"1884",
    	"user":"",
    	"pass":""
  },
  "influxdb": {
- 	"host": "localhost",
+ 	"host": "influxdb",
  	"port": "8086"
  },
  "enable_auth" : false, 
