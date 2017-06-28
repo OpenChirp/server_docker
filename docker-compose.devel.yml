@@ -55,7 +55,6 @@ services:
   rest: 
     build: node  
     volumes:
-      - ./node/config:/usr/src/app/config
       - ./node/code:/usr/src/app
     environment:
       - NODE_ENV=docker # will cause the node.js app to load the config/docker.json configuration file

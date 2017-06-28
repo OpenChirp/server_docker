@@ -1,7 +1,7 @@
-#  development configuration with persistence (run using: docker-compose -f docker-compose.yml -f docker-compose.devel-persitence.yml up -d)
+#  development configuration (run using: docker-compose -f docker-compose.yml -f docker-compose.devel.yml up -d)
 #  see: https://docs.docker.com/compose/extends/#example-use-case
 #  
-# -services *store* permament files
+# -services *dot not* store permament files
 # -map all service ports; rest API at port 10010
 # -mounts source code from the host
 #
@@ -19,35 +19,26 @@ version: '2'
 
 services:
   mongodb:
-    volumes: 
-      - ./data/mongodb:/data/db # permanent storage on the host
     ports:
       - "27017:27017"
     command: "--smallfiles" # small files
 
   redis: 
-    volumes:
-      - ./data/redis/:/data # permanent storage on the host
     ports:
       - "6379:6379"
 
   influxdb: 
-    volumes:
-        - ./data/influxdb:/var/lib/influxdb # permanent storage on the host
     ports:
       - "8083:8083"
       - "8086:8086"
       - "25826:25826/udp"
     environment:
       - INFLUXDB_ADMIN_ENABLED=true
-      - PRE_CREATE_DB="openchirp"         
+      - PRE_CREATE_DB="openchirp"      
     #  - INFLUXDB_GRAPHITE_ENABLED=true  
 
   mosquitto: 
     volumes:
-      - ./data/mosquitto/config:/mosquitto/config # permanent storage on the host
-      - ./data/mosquitto/data:/mosquitto/data # permanent storage on the host
-      - ./data/mosquitto/log:/mosquitto/log # permanent storage on the host
       - ./mosquitto/certs:/etc/ssl/certs
     hostname:
       mosquitto-server
@@ -56,24 +47,21 @@ services:
       - "8883:8883"
       - "9001:9001"
 
-  grafana:
-    volumes:
-      - ./data/grafana:/var/lib/grafana # permanent storage on the host
-
   web: 
-    build: httpd    
+    build: httpd  
     volumes:
       - ./httpd/code:/openchirp
 
   rest: 
-    build: node    
-    volumes:     
+    build: node  
+    volumes:
       - ./node/code:/usr/src/app
     environment:
       - NODE_ENV=docker # will cause the node.js app to load the config/docker.json configuration file
+    command: bash -c "while :; do sleep 10; done"
 
   mqtt-tsdb-storage-service:
-    build: mqtt-tsdb-storage-service       
+    build: mqtt-tsdb-storage-service    
     volumes:
       - ./mqtt-tsdb-storage-service/code:/code
       - ./mosquitto/certs:/etc/ssl/certs/mosquitto:ro

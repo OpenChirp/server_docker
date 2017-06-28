@@ -85,9 +85,7 @@ services:
     restart: always
 
   rest: 
-    image: openchirp/rest  
-    volumes:
-      - ./node/config:/usr/src/app/config    
+    image: openchirp/rest    
     environment:
       - NODE_ENV=docker # will cause the node.js app to load the config/docker.json configuration file
     logging:
