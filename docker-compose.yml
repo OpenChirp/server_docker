@@ -36,8 +36,6 @@ services:
       - "80:80"
 
   rest: 
-    volumes:
-      - ./node/config:/usr/src/app/config  
     ports:
       - "7000:10010"
     links:
