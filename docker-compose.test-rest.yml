@@ -40,7 +40,7 @@ services:
     restart: always
   
   rest: 
-    image: openchirp/rest
+    image: node
     volumes:
       - ./node/code:/usr/src/app 
     command: bash -c "while :; do sleep 100; done" # do not start now; this will keep the container up
