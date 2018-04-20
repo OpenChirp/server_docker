@@ -7,6 +7,8 @@
 #
 github.com/OpenChirp:website::httpd
 github.com/OpenChirp:openchirp_rest::node
-github.com/OpenChirp:mqtt_tsdb_storage_service::mqtt-tsdb-storage-service
-github.com/OpenChirp:easybits::serialization_service
+github.com:OpenChirp/mqtt_influx_storage_service::mqtt-influx-storage-service
+github.com:OpenChirp/gpsmapper-service::gpsmapper-service
+github.com:OpenChirp/lorawan-service::lorawan-service
+github.com/OpenChirp:easybits-service::easybits-service
 #empty line at the end

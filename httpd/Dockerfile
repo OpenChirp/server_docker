@@ -14,8 +14,9 @@ RUN apt-get update \
     && apt-get -y autoclean
 
 # nvm environment variables
-ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 6.10.3
+RUN mkdir /nvm
+ENV NVM_DIR /nvm
+ENV NODE_VERSION 7.9.0
 
 # install nvm
 # https://github.com/creationix/nvm#install-script
@@ -39,5 +40,6 @@ COPY ./code/ /openchirp/
 ADD ./config.ts /openchirp/src/app/
 WORKDIR /openchirp
 RUN npm install
+RUn npm install typescript@'>=2.1.0 <2.4.0'
 RUN ng build --prod
 RUN cp -R /openchirp/dist/* /usr/local/apache2/htdocs/

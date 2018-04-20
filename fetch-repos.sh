@@ -6,7 +6,7 @@
 ############################
 # clone source code repos into ./service-folder/code/
 
-printf "\n\033[1;34m Clonning Repositories...\033[m\n\n"
+printf "\n\033[1;34m Cloning Repositories...\033[m\n\n"
 
 while read line; do
 	# ignore comments
