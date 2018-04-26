@@ -52,7 +52,7 @@ The application is composed of the following containers.
 
 7. **mqtt-tsdb-storage-service** (time series storage service)
    TSDB Storage Service; [Source Repo](https://github.com/OpenChirp/mqtt_tsdb_storage_service)
-8. **grafana** (visualization service) [Source Repo](https://github.com/OpenChirp/grafana_dashboards)
+8. **grafana** (visualization service); [Source Repo](https://github.com/OpenChirp/grafana_dashboards)
 <!--
 <>8. **serialization-service**
 <>   Lora Serialization Service; [Source Repo](https://github.com/OpenChirp/easybits)

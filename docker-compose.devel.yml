@@ -36,6 +36,7 @@ services:
       - INFLUXDB_ADMIN_ENABLED=true
       - PRE_CREATE_DB="openchirp"      
     #  - INFLUXDB_GRAPHITE_ENABLED=true  
+
   grafana:
     build: grafana
     volumes:
@@ -43,6 +44,7 @@ services:
       - ./grafana/provisioning/:/etc/grafana/provisioning/
 
   mosquitto: 
+    build: mosquitto
     volumes:
       - ./mosquitto/certs:/etc/ssl/certs
     hostname:

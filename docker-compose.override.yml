@@ -54,6 +54,7 @@ services:
     restart: always
    
   mosquitto: 
+    image: openchirp/mosquitto
     volumes:
       - ./data/mosquitto/data:/mosquitto/data # permanent storage on the host
       - ./data/mosquitto/log:/mosquitto/log # permanent storage on the host
@@ -66,7 +67,7 @@ services:
     #restart: always
 
   grafana:
-    build: openchirp/grafana
+    image: openchirp/grafana
     volumes:
       - ./data/grafana:/var/lib/grafana
       - ./grafana/provisioning/:/etc/grafana/provisioning/

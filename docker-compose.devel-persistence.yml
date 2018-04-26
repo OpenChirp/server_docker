@@ -44,6 +44,7 @@ services:
     #  - INFLUXDB_GRAPHITE_ENABLED=true  
 
   mosquitto: 
+    build: mosquitto
     volumes:
       - ./data/mosquitto/config:/mosquitto/config # permanent storage on the host
       - ./data/mosquitto/data:/mosquitto/data # permanent storage on the host
@@ -57,9 +58,10 @@ services:
       - "9001:9001"
 
   grafana:
+    build: grafana
     volumes:
       - ./data/grafana:/var/lib/grafana # permanent storage on the host
-
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
   web: 
     build: httpd    
     volumes:
@@ -69,6 +71,7 @@ services:
     build: node    
     volumes:     
       - ./node/code:/usr/src/app
+      - /usr/src/app/node_modules
     environment:
       - NODE_ENV=docker # will cause the node.js app to load the config/docker.json configuration file
 
