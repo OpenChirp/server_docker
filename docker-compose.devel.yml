@@ -36,6 +36,11 @@ services:
       - INFLUXDB_ADMIN_ENABLED=true
       - PRE_CREATE_DB="openchirp"      
     #  - INFLUXDB_GRAPHITE_ENABLED=true  
+  grafana:
+    build: grafana
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
 
   mosquitto: 
     volumes:
@@ -51,7 +56,7 @@ services:
     build: httpd  
     volumes:
       - ./httpd/code:/openchirp
-
+  
   rest: 
     build: node  
     volumes:
@@ -60,8 +65,8 @@ services:
     environment:
       - NODE_ENV=docker # will cause the node.js app to load the config/docker.json configuration file
 
-  mqtt-tsdb-storage-service:
-    build: mqtt-tsdb-storage-service    
+  mqtt-influx-storage-service:
+    build: mqtt-influx-storage-service    
     volumes:
-      - ./mqtt-tsdb-storage-service/code:/code
+      - ./mqtt-influx-storage-service/code:/code
       - ./mosquitto/certs:/etc/ssl/certs/mosquitto:ro

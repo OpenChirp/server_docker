@@ -2,8 +2,9 @@ export class Configuration {
   base_url: string = "http://localhost:7000/"; // maps to docker compose service rest
   api_url: string = this.base_url + "api/";
   auth_url: string = this.base_url + "auth/";
-  google_auth: string = this.auth_url + "google/";
-  logout_url: string = this.auth_url + "logout/";
+  
+  google_auth_client_id:string="blahhh.apps.googleusercontent.com";
+
   grafana_url: string = "http://localhost:3000"; // maps to docker compose service grafana
 
   mapper_url: string = "http://localhost:9000/";  // maps to docker compose service mapper

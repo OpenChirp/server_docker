@@ -25,11 +25,11 @@ services:
       - influxdb
 
   grafana:
-    # TODO: create custom image that copies transducer files to the right place
-    image: grafana/grafana # https://hub.docker.com/r/grafana/grafana/
     ports:
       - "3000:3000"    
     links:
+      - influxdb
+    depends_on:
       - influxdb
     
   web: 
@@ -46,12 +46,12 @@ services:
     command: npm start
 #TODO: Run multiple commands ? A script that creates root location and other stuff post start or a separate service ?
 
-  mqtt-tsdb-storage-service:
+  mqtt-influx-storage-service:
     links:
       - rest
       - mosquitto:mosquitto-server
       - influxdb  
     command: bash -c "cat /etc/ssl/certs/mosquitto/ca.crt >> /etc/ssl/certs/ca-certificates.crt && 
-                      cp -f /run/service.config /code/ &&                                          
-                      python service.py -f service.config"                                         
+                      cp -f /run/service.conf /code/ &&                                          
+                      python influx_service.py -f service.conf"                                         
   

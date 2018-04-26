@@ -45,8 +45,8 @@ services:
       - ./node/code:/usr/src/app 
     command: bash -c "while :; do sleep 100; done" # do not start now; this will keep the container up
 
-  mqtt-tsdb-storage-service:
-    image: openchirp/mqtt-tsdb-storage-service    
+  mqtt-influx-storage-service:
+    image: openchirp/mqtt-influx-storage-service    
     volumes:
        - ./mosquitto/certs:/etc/ssl/certs/mosquitto:ro    
     restart: always

@@ -14,4 +14,4 @@ COPY ./code/ /code/
 RUN pip install -r requirements.txt
 
 # copy config file
-COPY service.config /run/
+COPY service.conf /run/

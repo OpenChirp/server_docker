@@ -66,9 +66,11 @@ services:
     #restart: always
 
   grafana:
+    build: openchirp/grafana
     volumes:
       - ./data/grafana:/var/lib/grafana
-    logging:
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    logging: 
       driver: "json-file" 
       options:
         max-size: "100m"
@@ -95,8 +97,8 @@ services:
         max-file: "5"
     restart: always
   
-  mqtt-tsdb-storage-service:
-    image: openchirp/mqtt-tsdb-storage-service    
+  mqtt-influx-storage-service:
+    image: openchirp/mqtt-influx-storage-service    
     volumes:
        - ./mosquitto/certs:/etc/ssl/certs/mosquitto:ro    
     logging:

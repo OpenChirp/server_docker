@@ -72,8 +72,8 @@ services:
     environment:
       - NODE_ENV=docker # will cause the node.js app to load the config/docker.json configuration file
 
-  mqtt-tsdb-storage-service:
-    build: mqtt-tsdb-storage-service       
+  mqtt-influx-storage-service:
+    build: mqtt-influx-storage-service       
     volumes:
-      - ./mqtt-tsdb-storage-service/code:/code
+      - ./mqtt-influx-storage-service/code:/code
       - ./mosquitto/certs:/etc/ssl/certs/mosquitto:ro
