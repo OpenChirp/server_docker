@@ -42,16 +42,17 @@ The application is composed of the following containers.
 
 2. **node** (node.JS application; REST API server application; [Source Repo](https://github.com/OpenChirp/openchirp_rest))
 
-3. **mongodb** (database)
+3. **mongodb** (all metadata about users, devices, services, locations, templates etc in stored in this database)
 
 4. **influxdb** (time series database)
 
-5. **redis** (data structure store)
+5. **redis** (user session store)
 
 6. **mosquitto** (MQTT broker)
 
 7. **mqtt-tsdb-storage-service** (time series storage service)
    TSDB Storage Service; [Source Repo](https://github.com/OpenChirp/mqtt_tsdb_storage_service)
+8. **grafana** (visualization service) [Source Repo](https://github.com/OpenChirp/grafana_dashboards)
 <!--
 <>8. **serialization-service**
 <>   Lora Serialization Service; [Source Repo](https://github.com/OpenChirp/easybits)
@@ -108,10 +109,6 @@ Once you have a working application, you can create a set of images using the **
 Currently Mosquitto is configured with two listners: TLS on port 1883 and no security on port 1884. The later port is not mapped and should not be accessible outside the docker environment. It was needed so that the rest application could connect to the Mosquitto server with minor changes (change the config file as opposed to change the code to support self-signed certificates used by the this docker instance of Mosquitto).
 
 Mosquitto is also not configured with users or ACLs.
-
-### Authentication
-
-The rest service is configured with no auth.
 
 ### Monitoring
 
