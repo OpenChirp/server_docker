@@ -45,9 +45,7 @@ services:
       - redis
       - influxdb
       - mosquitto
-    command: npm start
-#TODO: Run multiple commands ? A script that creates root location and other stuff post start or a separate service ?
-
+    
   mqtt-influx-storage-service:
     depends_on:
       - rest
