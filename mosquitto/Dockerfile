@@ -1,4 +1,5 @@
 # from https://gist.github.com/hardillb/0ce50250d40ff6fc3d623ddb5926ec4d
+# Made several changes to component versions and some other housekeeping
 FROM ubuntu:16.04
 MAINTAINER Ben Hardill <hardillb@gmail.com> 
 
