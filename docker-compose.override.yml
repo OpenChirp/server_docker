@@ -88,9 +88,7 @@ services:
     restart: always
 
   rest: 
-    image: openchirp/rest    
-    environment:
-      - NODE_ENV=docker # will cause the node.js app to load the config/docker.json configuration file
+    image: openchirp/rest       
     logging:
       driver: "json-file" 
       options:

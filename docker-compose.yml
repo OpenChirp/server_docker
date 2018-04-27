@@ -18,6 +18,8 @@ services:
     ports:
       - "1883:1883"
     hostname: mosquitto
+    environment:
+       - REST_MQTT_PASSWORD=${REST_MQTT_PASSWORD}
     depends_on:
       - mongodb  
 
@@ -34,6 +36,10 @@ services:
   rest: 
     ports:
       - "7000:10010"
+    environment:
+      - NODE_ENV=docker # will cause the node.js app to load the config/docker.json configuration file
+      - REST_MQTT_PASSWORD=${REST_MQTT_PASSWORD}
+      - ADMIN_PASSWORD =${ADMIN_PASSWORD}
     depends_on:
       - mongodb
       - redis

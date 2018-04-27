@@ -62,6 +62,7 @@ services:
     volumes:
       - ./data/grafana:/var/lib/grafana # permanent storage on the host
       - ./grafana/provisioning/:/etc/grafana/provisioning/
+      
   web: 
     build: httpd    
     volumes:
@@ -72,9 +73,7 @@ services:
     volumes:     
       - ./node/code:/usr/src/app
       - /usr/src/app/node_modules
-    environment:
-      - NODE_ENV=docker # will cause the node.js app to load the config/docker.json configuration file
-
+    
   mqtt-influx-storage-service:
     build: mqtt-influx-storage-service       
     volumes:
