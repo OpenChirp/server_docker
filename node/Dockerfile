@@ -14,3 +14,7 @@ WORKDIR /usr/src/app/
 
 # install dependencies according to package.json
 RUN npm install
+
+COPY startup-node.sh /usr/src/app/
+RUN chmod +x /usr/src/app/startup-node.sh
+CMD ["/bin/bash","/usr/src/app/startup-node.sh"]
