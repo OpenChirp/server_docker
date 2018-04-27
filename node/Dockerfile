@@ -16,5 +16,6 @@ WORKDIR /usr/src/app/
 RUN npm install
 
 COPY startup-node.sh /
+COPY docker.json.start /
 RUN chmod +x /startup-node.sh
 CMD ["/bin/bash","/startup-node.sh"]

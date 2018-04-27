@@ -4,7 +4,7 @@
 version: '2'
 services:
   mongodb:
-    image: mongo # https://hub.docker.com/_/mongo/
+    image: mongo:3.2.19 # https://hub.docker.com/_/mongo/
 
   redis: 
     image: redis # https://hub.docker.com/_/redis/

@@ -1,0 +1,11 @@
+# This affects access control for clients with no username.
+topic read $SYS/#
+
+# Servers and Services #
+
+# This only affects clients with username "openchirp_rest".
+user openchirp_rest
+topic #
+
+# This affects all clients.
+pattern write $SYS/broker/connection/%c/state

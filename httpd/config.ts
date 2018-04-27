@@ -5,7 +5,7 @@ export class Configuration {
   
   google_auth_client_id:string="blahhh.apps.googleusercontent.com";
 
-  grafana_url: string = "http://localhost:3000"; // maps to docker compose service grafana
+  grafana_url: string = "http://localhost:3000/"; // maps to docker compose service grafana
 
   mapper_url: string = "http://localhost:9000/";  // maps to docker compose service mapper
   mapper_url_public: string = this.mapper_url + "map/public/all";

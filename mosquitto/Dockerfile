@@ -44,9 +44,13 @@ RUN git clone https://github.com/jpmens/mosquitto-auth-plug.git
 WORKDIR /usr/local/src/mosquitto-auth-plug
 COPY config.mk /usr/local/src/mosquitto-auth-plug
 RUN make
+RUN cp /usr/local/src/mosquitto-auth-plug/auth-plug.so /etc/mosquitto/
+RUN cp /usr/local/src/mosquitto-auth-plug/np /etc/mosquitto/
 
 RUN chown mosquitto /etc/mosquitto
 COPY mosquitto.conf /etc/mosquitto/
+
+COPY acls /etc/mosquitto/
 COPY generate-CA.sh /etc/ssl/certs/
 
 RUN mkdir -p /var/log/mosquitto/

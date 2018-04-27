@@ -48,7 +48,7 @@ services:
     volumes:
       - ./data/mosquitto/config:/mosquitto/config # permanent storage on the host
       - ./data/mosquitto/data:/mosquitto/data # permanent storage on the host
-      - ./data/mosquitto/log:/mosquitto/log # permanent storage on the host
+      - ./data/mosquitto/log:/var/log/mosquitto/ # permanent storage on the host
       - ./mosquitto/certs:/etc/ssl/certs
     hostname:
       mosquitto-server
