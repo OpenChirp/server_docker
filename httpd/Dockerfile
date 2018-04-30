@@ -35,11 +35,14 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 #install angular cli
 RUN npm install -g @angular/cli
 
+# Rewrite rules for handling html5 routing
+COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
+
 # build website into the docker container 
 COPY ./code/ /openchirp/
 ADD ./config.ts /openchirp/src/app/
 WORKDIR /openchirp
 RUN npm install
-RUn npm install typescript@'>=2.1.0 <2.4.0'
+RUN npm install typescript@'>=2.1.0 <2.4.0'
 RUN ng build --prod
 RUN cp -R /openchirp/dist/* /usr/local/apache2/htdocs/

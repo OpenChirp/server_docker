@@ -15,3 +15,7 @@ RUN pip install -r requirements.txt
 
 # copy config file
 COPY service.conf /run/
+
+COPY startup-service.sh /run/
+RUN chmod +x /run/startup-service.sh
+CMD ["/bin/bash","/run/startup-service.sh"]

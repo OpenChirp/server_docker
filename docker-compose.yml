@@ -49,9 +49,7 @@ services:
   mqtt-influx-storage-service:
     depends_on:
       - rest
-      - mosquitto
-      - influxdb  
-    command: bash -c "cat /etc/ssl/certs/mosquitto/ca.crt >> /etc/ssl/certs/ca-certificates.crt && 
-                      cp -f /run/service.conf /code/ &&                                          
-                      python influx_service.py -f service.conf"                                         
+ #   command: bash -c "cat /etc/ssl/certs/mosquitto/ca.crt >> /etc/ssl/certs/ca-certificates.crt && 
+ #                     cp -f /run/service.conf /code/ &&                                          
+ #                     python influx_service.py -f service.conf"                                         
   
