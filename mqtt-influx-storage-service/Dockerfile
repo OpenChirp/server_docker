@@ -1,8 +1,5 @@
 # python container; see https://hub.docker.com/_/python/
-FROM python
-
-# clone mqtt_tsdb_storage_service repo code into the docker container 
-#RUN git clone https://github.com/OpenChirp/mqtt_tsdb_storage_service.git /code
+FROM python:3
 
 # change working directory
 WORKDIR /code
@@ -14,8 +11,10 @@ COPY ./code/ /code/
 RUN pip install -r requirements.txt
 
 # copy config file
-COPY service.conf /run/
+COPY service.conf /run/service.conf.start
 
 COPY startup-service.sh /run/
+COPY wait-for-it.sh /run/
+RUN chmod +x /run/wait-for-it.sh
 RUN chmod +x /run/startup-service.sh
-CMD ["/bin/bash","/run/startup-service.sh"]
+CMD ["/bin/bash", "/run/startup-service.sh"]

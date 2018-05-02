@@ -10,9 +10,9 @@ services:
     image: redis # https://hub.docker.com/_/redis/
 
   influxdb: 
-    build: influxdb
+    image: influxdb
     environment:
-      - PRE_CREATE_DB="openchirp"   
+      - INFLUXDB_DB="openchirp"   
       
   mosquitto: 
     ports:
@@ -39,7 +39,7 @@ services:
     environment:
       - NODE_ENV=docker # will cause the node.js app to load the config/docker.json configuration file
       - REST_MQTT_PASSWORD=${REST_MQTT_PASSWORD}
-      - ADMIN_PASSWORD =${ADMIN_PASSWORD}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
     depends_on:
       - mongodb
       - redis
@@ -49,6 +49,9 @@ services:
   mqtt-influx-storage-service:
     depends_on:
       - rest
+    environment:
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+
  #   command: bash -c "cat /etc/ssl/certs/mosquitto/ca.crt >> /etc/ssl/certs/ca-certificates.crt && 
  #                     cp -f /run/service.conf /code/ &&                                          
  #                     python influx_service.py -f service.conf"                                         
