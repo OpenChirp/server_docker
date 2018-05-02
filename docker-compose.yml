@@ -28,10 +28,16 @@ services:
       - "3000:3000"    
     depends_on:
       - influxdb
+    environment:
+       - GF_AUTH_ANONYMOUS_ENABLED=true
+       - GF_SECURITY_ADMIN_USER=admin
+       - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD}
     
   web: 
     ports:
       - "80:80"
+    environment:
+      - HOSTNAME=${HOSTNAME}
 
   rest: 
     ports:

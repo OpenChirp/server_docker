@@ -37,9 +37,6 @@ services:
 
   grafana:
     build: grafana
-    volumes:
-      - ./data/grafana:/var/lib/grafana
-      - ./grafana/provisioning/:/etc/grafana/provisioning/
 
   mosquitto: 
     build: mosquitto

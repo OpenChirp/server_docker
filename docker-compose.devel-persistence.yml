@@ -39,9 +39,7 @@ services:
       - "8086:8086"
       - "25826:25826/udp"
     environment:
-      - INFLUXDB_ADMIN_ENABLED=true
-      - PRE_CREATE_DB="openchirp"         
-    #  - INFLUXDB_GRAPHITE_ENABLED=true  
+      - INFLUXDB_ADMIN_ENABLED=true 
 
   mosquitto: 
     build: mosquitto
@@ -61,7 +59,6 @@ services:
     build: grafana
     volumes:
       - ./data/grafana:/var/lib/grafana # permanent storage on the host
-      - ./grafana/provisioning/:/etc/grafana/provisioning/
       
   web: 
     build: httpd    

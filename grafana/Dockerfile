@@ -2,3 +2,4 @@
 FROM grafana/grafana:5.0.4
 
 COPY ./code/transducer_v2.js /usr/share/grafana/public/dashboards/
+COPY ./provisioning/datasources/ /etc/grafana/provisioning/datasources/

@@ -44,5 +44,6 @@ ADD ./config.ts /openchirp/src/app/
 WORKDIR /openchirp
 RUN npm install
 RUN npm install typescript@'>=2.1.0 <2.4.0'
+#RUN sed -e "s/localhost/$HOSTNAME/" /openchirp/src/app/config.ts.start > /openchirp/src/app/config.ts
 RUN ng build --prod
 RUN cp -R /openchirp/dist/* /usr/local/apache2/htdocs/
