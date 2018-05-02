@@ -29,7 +29,7 @@ Multi-container docker setup for Openchirp Services.
 
 ## Website Address
 
-The demo website is configured for the URL [openchirp.demo](https://openchirp.demo). You need to make this address resolve to the container host so that **your** browser can access this URL. One way to do this is to add `<ip-of-container-host> openchirp.demo` to your [hosts](https://en.wikipedia.org/wiki/Hosts_(file)) file.
+The demo website is configured for localhost.(http://localhost)
 
 If you are deploying the application in a docker host with a name that can be resolved with DNS, configure your instance to use this name by editing the `httpd/config.ts` file (this is a copy of [this config.ts](https://github.com/OpenChirp/website/blob/master/src/app/config.ts)). This will require rebuilding the image using the development config: 
   > `docker-compose rm web && docker-compose -f docker-compose.yml -f docker-compose.devel.yml up --build -d`.
@@ -50,8 +50,8 @@ The application is composed of the following containers.
 
 6. **mosquitto** (MQTT broker)
 
-7. **mqtt-tsdb-storage-service** (time series storage service)
-   TSDB Storage Service; [Source Repo](https://github.com/OpenChirp/mqtt_tsdb_storage_service)
+7. **mqtt-influx-storage-service** (time series storage service)
+   InfluxDB Storage Service; [Source Repo](https://github.com/OpenChirp/mqtt_influx_storage_service)
 8. **grafana** (visualization service); [Source Repo](https://github.com/OpenChirp/grafana_dashboards)
 <!--
 <>8. **serialization-service**
@@ -105,10 +105,8 @@ Once you have a working application, you can create a set of images using the **
 
 ## Future...
 
-### Mosquitto Configuration
-Currently Mosquitto is configured with two listners: TLS on port 1883 and no security on port 1884. The later port is not mapped and should not be accessible outside the docker environment. It was needed so that the rest application could connect to the Mosquitto server with minor changes (change the config file as opposed to change the code to support self-signed certificates used by the this docker instance of Mosquitto).
-
-Mosquitto is also not configured with users or ACLs.
+### SSL Configuration
+SSL configuration is not done for HTTP and MQTT ports exposed.
 
 ### Monitoring
 

@@ -4,7 +4,7 @@
 # Ideally admin user and other seeding of data should happen in a separate container
 
 # Create Admin User
-curl -s -H "Content-Type: application/json" \
+curl -v -H "Content-Type: application/json" \
     -XPOST http://rest:10010/auth/signup \
         -d @- <<EOF
 {
@@ -15,7 +15,7 @@ curl -s -H "Content-Type: application/json" \
 EOF
 
 # Get Session cookie
-curl -s -H "Content-Type: application/json" \
+curl -v -H "Content-Type: application/json" \
     -XPOST http://rest:10010/auth/basic -c cookie.txt \
             -d @- <<EOF
 {
@@ -25,7 +25,7 @@ curl -s -H "Content-Type: application/json" \
 EOF
 
 # Create admin group
-curl -s -H "Content-Type: application/json" \
+curl -v -H "Content-Type: application/json" \
     -XPOST http://rest:10010/api/group -b cookie.txt \
             -d @- <<EOF
 {
@@ -34,7 +34,7 @@ curl -s -H "Content-Type: application/json" \
 EOF
 
 # Create developer group
-curl -s -H "Content-Type: application/json" \
+curl -v -H "Content-Type: application/json" \
     -XPOST http://rest:10010/api/group -b cookie.txt \
                         -d @- <<EOF
 {
@@ -43,7 +43,7 @@ curl -s -H "Content-Type: application/json" \
 EOF
 
 # Create root location
-curl -s -H "Content-Type: application/json" \
+curl -v -H "Content-Type: application/json" \
     -XPOST http://rest:10010/api/location -b cookie.txt \
             -d @- <<EOF
 {
