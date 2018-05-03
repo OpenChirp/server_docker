@@ -2,7 +2,8 @@
 Multi-container docker setup for Openchirp Services. 
 
 ## Environment Variables
-The openchirp docker uses the following environment variables:
+The openchirp docker uses the following environment variables. Please set these environment variables before running the docker commands.
+
 
 |Variable Name | Description|
 |---------------|--------------------|
@@ -10,7 +11,7 @@ The openchirp docker uses the following environment variables:
 | REST_MQTT_PASSWORD | Password for the rest server to mosquitto connection |
 
 ## Quick reference
-Please set the environment variables before running the commands.
+Remember to set the environment variabled described above before running the command below.
 * Start-up the application by running [Compose](https://docs.docker.com/compose/) inside the `server_docker` repo folder.
 
   * For a **demonstration configuration**:
@@ -53,7 +54,7 @@ For development configuration, all databases ports are exposed too .
 
 ## Website Address
 
-The demo website is configured for localhost (http://localhost). An admin user is seeded 
+The demo website is configured for localhost (http://localhost). Login using email : admin@localhost.com and password: $ADMIN_PASSWORD
 
 If you are deploying the application in a docker host with a name that can be resolved with DNS, configure your instance to use this name by editing the `httpd/config.ts` file (this is a copy of [this config.ts](https://github.com/OpenChirp/website/blob/master/src/app/config.ts)). This will require rebuilding the image using the development config: 
   > `docker-compose rm web && docker-compose -f docker-compose.yml -f docker-compose.devel.yml up --build -d`.
