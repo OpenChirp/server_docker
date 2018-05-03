@@ -3,10 +3,10 @@ Multi-container docker setup for Openchirp Services.
 
 ## Environment Variables
 The openchirp docker uses the following environment variables:
- Variable Name | Description|
----------------|--------------------|
-ADMIN_PASSWORD   | Admin password for REST API and grafana |  
-REST_MQTT_PASSWORD | Password for the rest server to mosquitto connection |
+ |Variable Name | Description|
+|---------------|--------------------|
+| ADMIN_PASSWORD   | Admin password for REST API and grafana |  
+| REST_MQTT_PASSWORD | Password for the rest server to mosquitto connection |
 
 ## Quick reference
 Please set the environment variables before running the commands.
@@ -39,15 +39,15 @@ The following command pulls pre-built openchirp images from docker hub.
 * More: Check [Compose Documentation](https://docs.docker.com/compose/overview/)
 
 ## Ports Exposed
- Port | Container| Credentials|
-------|----------|
-80    | Website|  Static Content
-7000  | REST API| admin@localhost.com  : $ADMIN_PASSWORD|
-1883   | MQTT|
-3000   | Grafana| admin  : $ADMIN_PASSWORD
-9000   | Mapper Service|
+| Port | Container| Credentials|
+| ------|----------|
+| 80    | Website|  Static Content
+| 7000  | REST API| admin@localhost.com  : $ADMIN_PASSWORD|
+| 1883   | MQTT|
+| 3000   | Grafana| admin  : $ADMIN_PASSWORD
+| 9000   | Mapper Service|
 
-For development configuration , all databases ports are exposed too .
+For development configuration, all databases ports are exposed too .
 
 ## Website Address
 
