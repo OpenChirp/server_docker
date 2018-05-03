@@ -6,12 +6,16 @@ Multi-container docker setup for Openchirp Services.
 * Start-up the application by running [Compose](https://docs.docker.com/compose/) inside the `server_docker` repo folder.
 
   * For a **demonstration configuration**:
+The following command pulls pre-built openchirp images from docker hub. 
 
   > `docker-compose up -d`
+  
 
   * For a **development configuration**:
+ The following command compiles the code locally. Run ./fetch-repos.sh before running this command to clone the openchirp repos from github.
 
   > `docker-compose -f docker-compose.yml -f docker-compose.devel.yml up -d`   
+
    
 * List running containers:
 
@@ -26,6 +30,15 @@ Multi-container docker setup for Openchirp Services.
   > `docker-compose stop`
 
 * More: Check [Compose Documentation](https://docs.docker.com/compose/overview/)
+
+## Ports Exposed
+ Port | Container|
+------|----------|
+80    | Website|
+7000  | REST API|
+1883   | MQTT|
+3000   | Grafana|
+9000   | Mapper Service|
 
 ## Website Address
 
