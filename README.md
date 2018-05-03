@@ -43,11 +43,11 @@ The following command pulls pre-built openchirp images from docker hub.
 
 | Port | Container| Credentials|
 | ------|----------|
-| 80    | Website|  Static Content
+| 80    | Website|  Static Content|
 | 7000  | REST API| admin@localhost.com  : $ADMIN_PASSWORD|
-| 1883   | MQTT|
-| 3000   | Grafana| admin  : $ADMIN_PASSWORD
-| 9000   | Mapper Service|
+| 1883   | MQTT|-|
+| 3000   | Grafana| admin  : $ADMIN_PASSWORD|
+| 9000   | Mapper Service|-|
 
 For development configuration, all databases ports are exposed too .
 
