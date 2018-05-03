@@ -42,7 +42,7 @@ The following command pulls pre-built openchirp images from docker hub.
 ## Ports Exposed
 
 | Port | Container| Credentials|
-| ------|----------|
+| ------|----------|------------|
 | 80    | Website|  Static Content|
 | 7000  | REST API| admin@localhost.com  : $ADMIN_PASSWORD|
 | 1883   | MQTT|-|
