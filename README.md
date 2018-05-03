@@ -1,8 +1,15 @@
 # Openchirp Server Docker
 Multi-container docker setup for Openchirp Services. 
 
-### Quick reference
+## Environment Variables
+The openchirp docker uses the following environment variables:
+ Variable Name | Description|
+---------------|--------------------|
+ADMIN_PASSWORD   | Admin password for REST API and grafana |  
+REST_MQTT_PASSWORD | Password for the rest server to mosquitto connection |
 
+## Quick reference
+Please set the environment variables before running the commands.
 * Start-up the application by running [Compose](https://docs.docker.com/compose/) inside the `server_docker` repo folder.
 
   * For a **demonstration configuration**:
@@ -32,17 +39,19 @@ The following command pulls pre-built openchirp images from docker hub.
 * More: Check [Compose Documentation](https://docs.docker.com/compose/overview/)
 
 ## Ports Exposed
- Port | Container|
+ Port | Container| Credentials|
 ------|----------|
-80    | Website|
-7000  | REST API|
+80    | Website|  Static Content
+7000  | REST API| admin@localhost.com  : $ADMIN_PASSWORD|
 1883   | MQTT|
-3000   | Grafana|
+3000   | Grafana| admin  : $ADMIN_PASSWORD
 9000   | Mapper Service|
+
+For development configuration , all databases ports are exposed too .
 
 ## Website Address
 
-The demo website is configured for localhost.(http://localhost)
+The demo website is configured for localhost (http://localhost). An admin user is seeded 
 
 If you are deploying the application in a docker host with a name that can be resolved with DNS, configure your instance to use this name by editing the `httpd/config.ts` file (this is a copy of [this config.ts](https://github.com/OpenChirp/website/blob/master/src/app/config.ts)). This will require rebuilding the image using the development config: 
   > `docker-compose rm web && docker-compose -f docker-compose.yml -f docker-compose.devel.yml up --build -d`.
