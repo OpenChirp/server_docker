@@ -39,9 +39,9 @@ services:
     build: grafana
 
   mosquitto: 
-    build: mosquitto
+    build: mosquitto # Builds the Dockerfile in mosquitto folder
     volumes:
-      - ./mosquitto/certs:/etc/ssl/certs
+      - ./mosquitto/certs:/etc/ssl/certs # Not used
     hostname:
       mosquitto-server
     ports:
@@ -50,18 +50,23 @@ services:
       - "9001:9001"
 
   web: 
-    build: httpd  
+    build: httpd  # Builds the Dockerfile in httpd folder
     volumes:
       - ./httpd/code:/openchirp
   
   rest: 
-    build: node  
+    build: node  # Builds the Dockerfile in node folder
     volumes:
       - ./node/code:/usr/src/app
       - /usr/src/app/node_modules
    
   mqtt-influx-storage-service:
-    build: mqtt-influx-storage-service    
+    build: mqtt-influx-storage-service    # Builds the Dockerfile in mqtt-influx-storage-service folder
     volumes:
       - ./mqtt-influx-storage-service/code:/code
-      - ./mosquitto/certs:/etc/ssl/certs/mosquitto:ro
+    
+  gpsmapper-service:
+    build: gpsmapper-service    # Builds the Dockerfile in gpsmapper-service folder
+    volumes:
+      - ./gpsmapper-service/code:/code
+     

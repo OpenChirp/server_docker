@@ -1,17 +1,30 @@
 # Openchirp Server Docker
 Multi-container docker setup for Openchirp Services. 
 
-### Quick reference
+## Environment Variables
+The openchirp docker uses the following environment variables. Please set these environment variables before running the docker commands.
 
+
+|Variable Name | Description|
+|---------------|--------------------|
+| ADMIN_PASSWORD   | Admin password for REST API and grafana |  
+| REST_MQTT_PASSWORD | Password for the rest server to mosquitto connection |
+
+## Quick reference
+Remember to set the environment variabled described above before running the command below.
 * Start-up the application by running [Compose](https://docs.docker.com/compose/) inside the `server_docker` repo folder.
 
   * For a **demonstration configuration**:
+The following command pulls pre-built openchirp images from docker hub. 
 
   > `docker-compose up -d`
+  
 
   * For a **development configuration**:
+ The following command compiles the code locally. Run ./fetch-repos.sh before running this command to clone the openchirp repos from github.
 
   > `docker-compose -f docker-compose.yml -f docker-compose.devel.yml up -d`   
+
    
 * List running containers:
 
@@ -27,9 +40,21 @@ Multi-container docker setup for Openchirp Services.
 
 * More: Check [Compose Documentation](https://docs.docker.com/compose/overview/)
 
+## Ports Exposed
+
+| Port | Container| Credentials|
+| ------|----------|------------|
+| 80    | Website|  Static Content|
+| 7000  | REST API| admin@localhost.com  : $ADMIN_PASSWORD|
+| 1883   | MQTT|-|
+| 3000   | Grafana| admin  : $ADMIN_PASSWORD|
+| 9000   | Mapper Service|-|
+
+For development configuration, all databases ports are exposed too .
+
 ## Website Address
 
-The demo website is configured for localhost.(http://localhost)
+The demo website is configured for localhost (http://localhost). Login using email : admin@localhost.com and password: $ADMIN_PASSWORD
 
 If you are deploying the application in a docker host with a name that can be resolved with DNS, configure your instance to use this name by editing the `httpd/config.ts` file (this is a copy of [this config.ts](https://github.com/OpenChirp/website/blob/master/src/app/config.ts)). This will require rebuilding the image using the development config: 
   > `docker-compose rm web && docker-compose -f docker-compose.yml -f docker-compose.devel.yml up --build -d`.

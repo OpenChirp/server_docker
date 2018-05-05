@@ -4,16 +4,21 @@
 version: '2'
 services:
   mongodb:
-    image: mongo:3.2.19 # https://hub.docker.com/_/mongo/
+    image: mongo:3.2.19 #  pulls from https://hub.docker.com/_/mongo/
 
   redis: 
-    image: redis # https://hub.docker.com/_/redis/
+    image: redis # pulls from https://hub.docker.com/_/redis/
 
   influxdb: 
-    image: influxdb
+    image: influxdb # pulls from https://hub.docker.com/_/influxdb/
     environment:
       - INFLUXDB_DB="openchirp"   
-      
+  
+# Note that no build or image is specified for the services below
+# because it is defined in docker-compose.override.yml and docke-compose.devel.yml 
+# For demo setup in override, the pre-built images are pulled from docker hub.
+# For dev setup in devel, images are built from source locally.
+
   mosquitto: 
     ports:
       - "1883:1883"
@@ -29,7 +34,7 @@ services:
     depends_on:
       - influxdb
     environment:
-       - GF_AUTH_ANONYMOUS_ENABLED=true
+       - GF_AUTH_ANONYMOUS_ENABLED=true # For users to see custom grafana dashboard embedded in openchirp. That dashboard needs an id to show any real data.
        - GF_SECURITY_ADMIN_USER=admin
        - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD}
     
