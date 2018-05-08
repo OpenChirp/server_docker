@@ -95,9 +95,7 @@ These are the configurations provided:
 
 * **docker-compose.override.yml**: Demonstration Configuration (**default**)
 
-* **docker-compose.devel.yml**: Development Configuration with no persistence
-
-* **docker-compose.devel-persistence.yml**: Development Configuration with persistence
+* **docker-compose.devel.yml**: Development Configuration
 
 * **docker-compose.test-rest.yml**: Starts services needed to tests the REST application
 
@@ -107,7 +105,7 @@ The demonstration configuration uses pre-built Openchirp images from [Docker Hub
 
 ### Development Configuration
 
-The development configuration exposes all service ports, does not persist files and mounts application code from the host.
+The development configuration compiles all the code locally and mounts the code volumes from host machine to the containers. This configuration persists data on the host in data folder and also exposes all the database ports.  To start a fresh instance with no previous data, just deleting the data folder will do the trick. 
 
 Before starting a development configuration you should get the source code using the **fetch-repos.sh** script:
 > chmod +x fetch-repos.sh && ./fetch-repos.sh
@@ -116,9 +114,6 @@ You start a **development configuration** using the **docker-compose.devel.yml**
 
 > `docker-compose -f docker-compose.yml -f docker-compose.devel.yml up -d`
 
-You also have a **development configuration** with persistence configured in the **docker-compose.devel-persistence.yml**. Run it with:
-
-> `docker-compose -f docker-compose.yml -f docker-compose.devel-persistence.yml up -d`
 
 ## Openchirp Docker Images
 
