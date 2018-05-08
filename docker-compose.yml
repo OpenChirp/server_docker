@@ -49,25 +49,24 @@ services:
       - "7000:10010"
     environment:
       - NODE_ENV=docker # will cause the node.js app to load the config/docker.json configuration file
-      - REST_MQTT_PASSWORD=${REST_MQTT_PASSWORD}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - REST_MQTT_PASSWORD=${REST_MQTT_PASSWORD}    
     depends_on:
       - mongodb
       - redis
       - influxdb
       - mosquitto
-    
-  mqtt-influx-storage-service:
+
+  # This container creates admin user, admin and developer group, root location and service tokens.   
+  seed-data:
+    environment:
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD} 
     depends_on:
       - rest
-    environment:
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+
+  mqtt-influx-storage-service:
+    depends_on:
+      - seed_data
   
   gpsmapper-service:
-    environment:
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
-   
- #   command: bash -c "cat /etc/ssl/certs/mosquitto/ca.crt >> /etc/ssl/certs/ca-certificates.crt && 
- #                     cp -f /run/service.conf /code/ &&                                          
- #                     python influx_service.py -f service.conf"                                         
-  
+    depends_on:
+      - seed_data

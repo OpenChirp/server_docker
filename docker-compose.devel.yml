@@ -68,7 +68,13 @@ services:
     volumes:
       - ./node/code:/usr/src/app
       - /usr/src/app/node_modules
-   
+      - ./data/node/log:/logs
+
+  seed-data:
+    build: seed-data
+    volumes:
+      - ./data/tokens:/tokens
+
   mqtt-influx-storage-service:
     build: mqtt-influx-storage-service    # Builds the Dockerfile in mqtt-influx-storage-service folder
     volumes:
