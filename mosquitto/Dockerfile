@@ -62,8 +62,6 @@ WORKDIR /usr/local/src
 
 #ENTRYPOINT ["/usr/local/src/docker-entrypoint.sh"] 
 
-# IMPORTANT: startup-mosquitto.sh will generate a self-signed certificate for mosquitto
-# (a new certificate must be generated if the docker instance changes address)
 COPY startup-mosquitto.sh /usr/local/src/
 RUN chmod +x /usr/local/src/startup-mosquitto.sh
 CMD ["/bin/bash","/usr/local/src/startup-mosquitto.sh"]

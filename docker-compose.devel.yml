@@ -1,7 +1,7 @@
 #  development configuration (run using: docker-compose -f docker-compose.yml -f docker-compose.devel.yml up -d)
 #  see: https://docs.docker.com/compose/extends/#example-use-case
 #  
-# -services *dot not* store permament files
+# -services store all data in data folder
 # -map all service ports; rest API at port 10010
 # -mounts source code from the host
 #
@@ -19,15 +19,21 @@ version: '2'
 
 services:
   mongodb:
+    volumes: 
+      - ./data/mongodb:/data/db # permanent storage on the host
     ports:
       - "27017:27017"
     command: "--smallfiles" # small files
 
   redis: 
+    volumes:
+      - ./data/redis/:/data # permanent storage on the host
     ports:
       - "6379:6379"
 
   influxdb: 
+    volumes:
+        - ./data/influxdb:/var/lib/influxdb # permanent storage on the host
     ports:
       - "8083:8083"
       - "8086:8086"
@@ -37,11 +43,14 @@ services:
 
   grafana:
     build: grafana
+    volumes:
+      - ./data/grafana:/var/lib/grafana # permanent storage on the host
 
   mosquitto: 
-    build: mosquitto # Builds the Dockerfile in mosquitto folder
+    build: mosquitto # Builds the Dockerfile in mosquitto folder 
     volumes:
-      - ./mosquitto/certs:/etc/ssl/certs # Not used
+      - ./data/mosquitto/data:/var/lib/mosquitto # permanent storage on the host
+      - ./data/mosquitto/log:/var/log/mosquitto # permanent storage on the host   
     hostname:
       mosquitto-server
     ports:
@@ -67,6 +76,5 @@ services:
     
   gpsmapper-service:
     build: gpsmapper-service    # Builds the Dockerfile in gpsmapper-service folder
-    volumes:
-      - ./gpsmapper-service/code:/code
+    
      

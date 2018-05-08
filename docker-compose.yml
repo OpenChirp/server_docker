@@ -15,7 +15,7 @@ services:
       - INFLUXDB_DB="openchirp"   
   
 # Note that no build or image is specified for the services below
-# because it is defined in docker-compose.override.yml and docke-compose.devel.yml 
+# because it is defined in docker-compose.override.yml and docker-compose.devel.yml 
 # For demo setup in override, the pre-built images are pulled from docker hub.
 # For dev setup in devel, images are built from source locally.
 

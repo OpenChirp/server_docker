@@ -10,7 +10,7 @@
 #chmod 777 /etc/ssl/certs/*
 
 #
-#Save openchirp_rest user(for node.js app) and its hashed password in file backed for mosquitto auth
+#Save openchirp_rest user(for node.js app) and its hashed password in file backend for mosquitto auth
 echo "openchirp_rest:"$(/etc/mosquitto/np -p $REST_MQTT_PASSWORD) >  /etc/mosquitto/passwords
 
 # startup mosquitto
