@@ -62,7 +62,11 @@ services:
       - rest
     environment:
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
-
+  
+  gpsmapper-service:
+    environment:
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+   
  #   command: bash -c "cat /etc/ssl/certs/mosquitto/ca.crt >> /etc/ssl/certs/ca-certificates.crt && 
  #                     cp -f /run/service.conf /code/ &&                                          
  #                     python influx_service.py -f service.conf"                                         
