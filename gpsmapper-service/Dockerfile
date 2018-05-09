@@ -1,6 +1,6 @@
 
 # TODO : use a slimmer image to reduce overall image size
-# Uing a Debian image with the latest version of Go installed
+# Using a Debian image with the latest version of Go installed
 # and a workspace (GOPATH) configured at /go.
 FROM golang:1.10.2
 
