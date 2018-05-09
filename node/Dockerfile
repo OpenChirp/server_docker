@@ -1,5 +1,5 @@
 # node container; see https://hub.docker.com/r/_/node/
-FROM node:7.10.0
+FROM node:7.10.0-alpine
 
 # update node (uncomment, if needed...)
 #sudo npm cache clean -f
@@ -18,4 +18,4 @@ RUN npm install
 COPY startup-node.sh /
 COPY docker.json.start /
 RUN chmod +x /startup-node.sh
-CMD ["/bin/bash","/startup-node.sh"]
+CMD ["/bin/sh","/startup-node.sh"]

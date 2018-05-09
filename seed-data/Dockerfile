@@ -1,8 +1,8 @@
-FROM alpine:3.5
+FROM python:3-alpine
+# The seed_data script generates the tokens and puts them in the tokens folder
+RUN mkdir /tokens
 # change working directory
 WORKDIR /run
-RUN mkdir /tokens
-
 COPY seed_data.sh /run/
 COPY wait-for-it.sh /run/
 RUN chmod +x /run/wait-for-it.sh

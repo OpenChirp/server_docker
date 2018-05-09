@@ -65,8 +65,8 @@ services:
 
   mqtt-influx-storage-service:
     depends_on:
-      - seed_data
+      - seed-data
   
   gpsmapper-service:
     depends_on:
-      - seed_data
+      - seed-data

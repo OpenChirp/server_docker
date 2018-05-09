@@ -1,5 +1,3 @@
-/* Config Documentation:  https://github.com/OpenChirp/openchirp_rest#config*/
-/* NOTE: The hostnames for mongo, mqtt, influx and redis in this config match the service names for their respective containers. These should NOT be updated*/
 {
 "db": "mongodb://mongodb/openchirp",
 "mqtt": {
