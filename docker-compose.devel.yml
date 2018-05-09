@@ -51,8 +51,6 @@ services:
     volumes:
       - ./data/mosquitto/data:/var/lib/mosquitto # permanent storage on the host
       - ./data/mosquitto/log:/var/log/mosquitto # permanent storage on the host   
-    hostname:
-      mosquitto-server
     ports:
       - "1883:1883"
       - "8883:8883"

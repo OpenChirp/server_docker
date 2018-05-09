@@ -22,7 +22,6 @@ services:
   mosquitto: 
     ports:
       - "1883:1883"
-    hostname: mosquitto
     environment:
        - REST_MQTT_PASSWORD=${REST_MQTT_PASSWORD}
     depends_on:

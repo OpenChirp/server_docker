@@ -64,4 +64,4 @@ WORKDIR /usr/local/src
 
 COPY startup-mosquitto.sh /usr/local/src/
 RUN chmod +x /usr/local/src/startup-mosquitto.sh
-CMD ["/bin/bash","/usr/local/src/startup-mosquitto.sh"]
+CMD ["/usr/local/src/startup-mosquitto.sh"]

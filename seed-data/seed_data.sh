@@ -6,6 +6,12 @@
 # 4. Storage service and its token(stored in file to be read later by storage service container)
 # 5. Mapper service and its token(stored in file to be read later by mapper service container)
 
+# Check to see if data was already seeded
+if [ -f /tokens/storage_service.token ]; then
+    echo "Service token already exists. Not seeding any data !"
+    exit 0
+fi
+
 # Create Admin User
 curl -s -H "Content-Type: application/json" \
     -XPOST http://rest:10010/auth/signup \

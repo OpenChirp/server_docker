@@ -4,9 +4,9 @@
 #[ -z "$BASH_VERSINFO" ] && printf "\n\033[1;35m Please make sure you're using \"bash\"! Bye...\033[m\n\n" >&2 && exit 245
 
 # commits and pushes the folowing repos
-docker_repos="serverdocker_web_1:openchirp/web serverdocker_rest_1:openchirp/rest serverdocker_mosquitto_1:openchirp/mosquitto serverdocker_grafana_1:openchirp/grafana serverdocker_mqtt-influx-storage-service_1:openchirp/mqtt-influx-storage-service"
+docker_repos="serverdocker_web_1:openchirp/web serverdocker_rest_1:openchirp/rest serverdocker_seed-data_1:openchirp/seed-data serverdocker_mosquitto_1:openchirp/mosquitto serverdocker_grafana_1:openchirp/grafana serverdocker_mqtt-influx-storage-service_1:openchirp/mqtt-influx-storage-service serverdocker_gpsmapper-service_1:openchirp/gpsmapper-service"
 
-# edit these at you convinience
+# edit these at you convenience
 commit_author="Openchirp"
 commit_tag="$1"
 commit_comment="\"${commit_tag} commit.\""
