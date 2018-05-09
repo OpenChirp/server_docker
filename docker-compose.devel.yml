@@ -6,7 +6,7 @@
 # -mounts source code from the host
 #
 # *Logs*
-# 
+#    # TODO: some container logs are mounted to data/ directory, but some arent. This needs some cleanup.
 #    By default logs are "json-file", and are written to: 
 #    /var/lib/docker/containers/<container id>/<container id>-json.log
 #    
@@ -42,7 +42,7 @@ services:
       - INFLUXDB_ADMIN_ENABLED=true
 
   grafana:
-    build: grafana
+    build: grafana  # Builds the Dockerfile in grafana folder
     volumes:
       - ./data/grafana:/var/lib/grafana # permanent storage on the host
 
@@ -73,14 +73,16 @@ services:
   seed-data:
     build: seed-data
     volumes:
-      - ./data/tokens:/tokens
+      - ./data/tokens:/tokens  # Mount tokens to host machine so that service containers can read them.   
 
   mqtt-influx-storage-service:
     build: mqtt-influx-storage-service    # Builds the Dockerfile in mqtt-influx-storage-service folder
     volumes:
       - ./mqtt-influx-storage-service/code:/code
+      - ./data/tokens:/tokens  # So that the service can read its token
     
   gpsmapper-service:
     build: gpsmapper-service    # Builds the Dockerfile in gpsmapper-service folder
-    
+    volumes:
+      - ./data/tokens:/tokens # So that the service can read its token
      

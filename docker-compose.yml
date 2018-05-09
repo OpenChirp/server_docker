@@ -70,3 +70,5 @@ services:
   gpsmapper-service:
     depends_on:
       - seed-data
+    ports:
+      - "9000:9000"  

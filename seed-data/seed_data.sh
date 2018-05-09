@@ -87,5 +87,5 @@ MP_SERVICE_TOKEN=$(curl -s -H "Content-Type: application/json" \
 #Remove double quotes from start and end of token
 MP_TOKEN=`sed -e 's/^"//' -e 's/"$//' <<<"$MP_SERVICE_TOKEN"`
 
-echo "SERVICE_TOKEN="$SERVICE_TOKEN >> /tokens/mapper_service.token
+echo "SERVICE_TOKEN="$MP_TOKEN >> /tokens/mapper_service.token
 

@@ -14,7 +14,5 @@ RUN pip install -r requirements.txt
 COPY service.conf /run/service.conf.start
 
 COPY startup-service.sh /run/
-COPY wait-for-it.sh /run/
-RUN chmod +x /run/wait-for-it.sh
 RUN chmod +x /run/startup-service.sh
-CMD ["/run/wait-for-it.sh", "rest:10010", "--","/bin/bash", "/run/startup-service.sh"]
+CMD ["/run/startup-service.sh"]

@@ -8,7 +8,7 @@
 # -logs have a maximum of 100m, and a maximum of 5 log files are kept
 #
 # *Logs*
-#
+#   # TODO: some container logs(mosquitto and rest) are mounted to data/ directory, but others arent. This needs some cleanup.
 #    "json-file" logging will write logs to:
 #    /var/lib/docker/containers/<container id>/<container id>-json.log
 #    
@@ -97,15 +97,28 @@ services:
     restart: always
 
   seed-data:
-    build: openchirp/seed-data
+    image: openchirp/seed-data
     volumes:
-      - ./data/tokens:/tokens
+      - ./data/tokens:/tokens # Mount tokens to host machine so that service containers can read them.   
 
   mqtt-influx-storage-service:
-    image: openchirp/mqtt-influx-storage-service    
+    image: openchirp/mqtt-influx-storage-service 
+    volumes:
+      - ./data/tokens:/tokens  # So that the service can read its token   
     logging:
       driver: "json-file" 
       options:
         max-size: "100m"
         max-file: "5"
     restart: always
+
+  gpsmapper-service:
+    image: openchirp/gpsmapper-service    
+    volumes:
+      - ./data/tokens:/tokens # So that the service can read its token
+    logging:
+      driver: "json-file" 
+      options:
+        max-size: "100m"
+        max-file: "5"
+    restart: always  
