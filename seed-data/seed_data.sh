@@ -7,7 +7,7 @@
 # 5. Mapper service and its token(stored in file to be read later by mapper service container)
 
 # Create Admin User
-curl -v -H "Content-Type: application/json" \
+curl -s -H "Content-Type: application/json" \
     -XPOST http://rest:10010/auth/signup \
         -d @- <<EOF
 {
@@ -18,7 +18,7 @@ curl -v -H "Content-Type: application/json" \
 EOF
 
 # Get Session cookie
-curl -v -H "Content-Type: application/json" \
+curl -s -H "Content-Type: application/json" \
     -XPOST http://rest:10010/auth/basic -c cookie.txt \
             -d @- <<EOF
 {
@@ -28,7 +28,7 @@ curl -v -H "Content-Type: application/json" \
 EOF
 
 # Create admin group
-curl -v -H "Content-Type: application/json" \
+curl -s -H "Content-Type: application/json" \
     -XPOST http://rest:10010/api/group -b cookie.txt \
             -d @- <<EOF
 {
@@ -37,7 +37,7 @@ curl -v -H "Content-Type: application/json" \
 EOF
 
 # Create developer group
-curl -v -H "Content-Type: application/json" \
+curl -s -H "Content-Type: application/json" \
     -XPOST http://rest:10010/api/group -b cookie.txt \
                         -d @- <<EOF
 {
@@ -46,7 +46,7 @@ curl -v -H "Content-Type: application/json" \
 EOF
 
 # Create root location
-curl -v -H "Content-Type: application/json" \
+curl -s -H "Content-Type: application/json" \
     -XPOST http://rest:10010/api/location -b cookie.txt \
             -d @- <<EOF
 {
@@ -60,6 +60,7 @@ SS_SERVICE_ID=$(curl -s -H "Content-Type: application/json" \
     -XPOST http://rest:10010/api/service -b cookie.txt \
                 --data '{"name": "Timeseries storage service", "description": "This service stores transducer data in influxdb"}'  | python -c "import sys, json; print(json.load(sys.stdin)['id'])" )
 
+echo "SERVICE_ID="$SS_SERVICE_ID > /tokens/storage_service.token
 
 # Create storage service token
 SS_SERVICE_TOKEN=$(curl -s -H "Content-Type: application/json" \
@@ -69,12 +70,14 @@ SS_SERVICE_TOKEN=$(curl -s -H "Content-Type: application/json" \
 #Remove double quotes from start and end of token
 SS_TOKEN=`sed -e 's/^"//' -e 's/"$//' <<<"$SS_SERVICE_TOKEN"`
 
+echo "SERVICE_TOKEN="$SS_TOKEN >> /tokens/storage_service.token
 
 # Create mapper service
 MP_SERVICE_ID=$(curl -s -H "Content-Type: application/json" \
     -XPOST http://rest:10010/api/service -b cookie.txt \
                 --data '{"name": "GPS Mapper ", "description": "Display GPS tagged devices publicly on landing page map"}'  | python -c "import sys, json; print(json.load(sys.stdin)['id'])" )
 
+echo "SERVICE_ID="$MP_SERVICE_ID > /tokens/mapper_service.token
 
 # Create mapper service token
 MP_SERVICE_TOKEN=$(curl -s -H "Content-Type: application/json" \
@@ -84,4 +87,5 @@ MP_SERVICE_TOKEN=$(curl -s -H "Content-Type: application/json" \
 #Remove double quotes from start and end of token
 MP_TOKEN=`sed -e 's/^"//' -e 's/"$//' <<<"$MP_SERVICE_TOKEN"`
 
+echo "SERVICE_TOKEN="$SERVICE_TOKEN >> /tokens/mapper_service.token
 
