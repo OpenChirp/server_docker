@@ -5,10 +5,9 @@ do
   sleep 2
 done
 
-# Add tokens to env file
-cat /tokens/mapper_service.token >> /run/service.env
-# Set environment variable
+source /tokens/mapper_service.token
 source /run/service.env
 
 # Start service
+export FRAMEWORK_SERVER MQTT_SERVER HTTP_PORT SERVICE_ID SERVICE_TOKEN
 /go/bin/gpsmapper-service

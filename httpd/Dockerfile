@@ -35,7 +35,7 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 #install angular cli
 RUN npm install -g @angular/cli
 
-# Rewrite rules for handling html5 routing
+# The custom httpd.conf has rewrite rules for handling html5 routing
 COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
 
 # build website into the docker container 

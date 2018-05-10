@@ -8,4 +8,5 @@ RUN go get github.com/openchirp/gpsmapper-service
 COPY startup_service.sh /run/
 COPY service.env /run/
 RUN chmod +x /run/startup_service.sh
-CMD ["/run/startup_service.sh"]
+#RUN source /run/service.env
+CMD ["/bin/bash","/run/startup_service.sh"]
