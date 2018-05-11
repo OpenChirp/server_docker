@@ -120,7 +120,7 @@ Once you have a working application, you can create a set of images using the **
 
 > `./commit-and-push-images.sh v1`
 
-This requires credentials of the openchirp user on docker hub which are in this [wiki](https://github.com/OpenChirp/deployment/wiki#pushing-images-to-docker-hub)
+This requires credentials of the openchirp user on docker hub. Login via command line using the command `docker login` with credentials documented in this [wiki](https://github.com/OpenChirp/deployment/wiki#pushing-images-to-docker-hub)
 
 ## Future...
 
