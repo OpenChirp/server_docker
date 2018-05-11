@@ -12,7 +12,7 @@ The openchirp docker uses the following environment variables. Please set these 
 | REST_MQTT_PASSWORD | Password for the rest server to mosquitto connection |
 
 ## Quick reference
-Remember to set the environment variabled described above before running the command below.
+Remember to set the environment variable described above before running the command below.
 * Start-up the application by running [Compose](https://docs.docker.com/compose/) inside the `server_docker` repo folder.
 
   * For a **demonstration configuration**:
@@ -119,6 +119,8 @@ Docker images with the Openchirp services application code and configuration wer
 Once you have a working application, you can create a set of images using the **commit-and-push-images.sh  script**, which takes an image tag as argument. E.g. to commit images with a “v1” tag, do:
 
 > `./commit-and-push-images.sh v1`
+
+This requires credentials of the openchirp user on docker hub which are in this [wiki](https://github.com/OpenChirp/deployment/wiki#pushing-images-to-docker-hub)
 
 ## Future...
 
