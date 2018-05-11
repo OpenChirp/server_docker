@@ -15,7 +15,7 @@
 #       
 #    *No maximum log sizes defined*
 # 
-version: '2'
+version: '3'
 
 services:
   mongodb:
@@ -57,7 +57,11 @@ services:
       - "9001:9001"
 
   web: 
-    build: prebuilt-website  # Builds the Dockerfile in httpd folder
+    build: 
+      context: ./prebuilt-website   
+      args:
+        - servername=$HOSTNAME
+
     # Removing this volume since the docker image builds and copies code to apache folder.
     # Making changes to code here wont auto-deploy. 
     # TODO: Will be better to have a separate docker image for dev that uses ng serve

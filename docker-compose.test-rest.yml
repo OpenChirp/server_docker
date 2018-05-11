@@ -15,7 +15,7 @@
 #    You can use docker inspect to check this: 
 #    docker inspect --format='{{.LogPath}}' $INSTANCE_ID
 # 
-version: '2'
+version: '3'
 
 services:
   mongodb:

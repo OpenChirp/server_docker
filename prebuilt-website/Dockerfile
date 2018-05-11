@@ -1,6 +1,6 @@
 # Pull prebuilt openchirp web image from docker hub(built from httpd/Dockerfile)
 FROM openchirp/web
-ARG servername=localhost # Default o localhost if $HOSTNAME is not set
+ARG servername
 ENV HOST=$servername
 
 RUN cp -R /openchirp/* /run/

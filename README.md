@@ -7,7 +7,8 @@ The openchirp docker uses the following environment variables. Please set these 
 
 |Variable Name | Description|
 |---------------|--------------------|
-| ADMIN_PASSWORD   | Admin password for REST API and grafana |  
+| HOSTNAME   | This should be set to a DNS resolvable hostname for the machine or set to localhost. Please note, website won't work if this value is not set |  
+| ADMIN_PASSWORD   | Password for admin user to login to website and grafana |  
 | REST_MQTT_PASSWORD | Password for the rest server to mosquitto connection |
 
 ## Quick reference
@@ -54,10 +55,8 @@ For development configuration, all databases ports are exposed too .
 
 ## Website Address
 
-The demo website is configured for localhost (http://localhost). Login using email : admin@localhost.com and password: $ADMIN_PASSWORD
+The demo website is configured for the hostname set in $HOSTNAME environment variable (http://$HOSTNAME). Login using email : admin@localhost.com and password: $ADMIN_PASSWORD
 
-If you are deploying the application in a docker host with a name that can be resolved with DNS, configure your instance to use this name by editing the `httpd/config.ts` file (this is a copy of [this config.ts](https://github.com/OpenChirp/website/blob/master/src/app/config.ts)). This will require rebuilding the image using the development config: 
-  > `docker-compose rm web && docker-compose -f docker-compose.yml -f docker-compose.devel.yml up --build -d`.
 
 ## Containers
 
@@ -78,10 +77,8 @@ The application is composed of the following containers.
 7. **mqtt-influx-storage-service** (time series storage service)
    InfluxDB Storage Service; [Source Repo](https://github.com/OpenChirp/mqtt_influx_storage_service)
 8. **grafana** (visualization service); [Source Repo](https://github.com/OpenChirp/grafana_dashboards)
-<!--
-<>8. **serialization-service**
-<>   Lora Serialization Service; [Source Repo](https://github.com/OpenChirp/easybits)
--->
+9. **gpsmapper-service** (mapper service); [Source Repo](https://github.com/OpenChirp/gpsmapper-service)
+10. **seed-data** (this container seeds data and exits); 
 
 ## Multiple Configurations
 
@@ -127,6 +124,9 @@ Once you have a working application, you can create a set of images using the **
 
 ### SSL Configuration
 SSL configuration is not done for HTTP and MQTT ports exposed.
+
+### Reverse Proxy Setup
+The apache config for proxying requests to ports 7000, 3000, 9000 is not done.
 
 ### Monitoring
 
