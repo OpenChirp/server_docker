@@ -1,7 +1,10 @@
-# Pull prebuilt openchirp web image from docker hub(built from httpd/Dockerfile) and update hostname if set
+# Pull prebuilt openchirp web image from docker hub(built from httpd/Dockerfile)
 FROM openchirp/web
-ARG servername
-RUN export HOST=$servername
-COPY update-hostname.sh /run/
-RUN chmod +x /run/update-hostname.sh
-RUN /run/update-hostname.sh
+ARG servername=localhost # Default o localhost if $HOSTNAME is not set
+ENV HOST=$servername
+
+RUN cp -R /openchirp/* /run/
+RUN sed -i "s/localhost/$HOST/g" /run/src/app/config.ts
+WORKDIR /run
+RUN ng build --prod --aot
+RUN cp -R /run/dist/* /usr/local/apache2/htdocs/
