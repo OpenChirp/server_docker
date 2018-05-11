@@ -57,9 +57,12 @@ services:
       - "9001:9001"
 
   web: 
-    image: openchirp/web  # Builds the Dockerfile in httpd folder
-    volumes:
-      - ./httpd/code:/openchirp
+    build: prebuilt-website  # Builds the Dockerfile in httpd folder
+    # Removing this volume since the docker image builds and copies code to apache folder.
+    # Making changes to code here wont auto-deploy. 
+    # TODO: Will be better to have a separate docker image for dev that uses ng serve
+    #volumes:
+    #  - ./httpd/code:/openchirp
   
   rest: 
     build: node  # Builds the Dockerfile in node folder

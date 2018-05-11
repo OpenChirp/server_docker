@@ -1,7 +1,7 @@
 # basic openchirp service configuration
 # see: https://docs.docker.com/compose/extends/#example-use-case
 #
-version: '2'
+version: '3'
 services:
   mongodb:
     image: mongo:3.2.19 #  pulls from https://hub.docker.com/_/mongo/
@@ -42,6 +42,7 @@ services:
       - "80:80"
     environment:
       - HOSTNAME=${HOSTNAME}
+    
 
   rest: 
     ports:
